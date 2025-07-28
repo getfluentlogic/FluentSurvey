@@ -148,7 +148,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 📞 Contact
 
 For questions about the assessment framework or FluentLogic services:
-- **Nidhi Sharma**: Connect on LinkedIn
+- **Nidhi Sharma**: Connect on [LinkedIn](https://www.linkedin.com/in/nidhionlinkedin/)
 - **Newsletter**: [FluentLogic Substack](https://getfluentlogic.substack.com/)
 
 ## 🙏 Acknowledgments
