@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent Build vs Buy Assessment Framework v3.0</title>
+    <style>
+        @media print {
+            body { margin: 0; }
+            .page-break { page-break-after: always; }
+            .no-break { page-break-inside: avoid; }
+            .section { page-break-inside: avoid; }
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+        }
+        
+        h1 {
+            color: #1a1a1a;
+            border-bottom: 3px solid #7B6EF6;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-top: 30px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 8px;
+        }
+        
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+        }
+        
+        h4 {
+            color: #555;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+        }
+        
+        .header h1 {
+            border: none;
+            margin: 0;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+        
+        .quick-decision {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .question-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .radio-item {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .radio-item:before {
+            content: "○";
+            position: absolute;
+            left: 0;
+            font-size: 18px;
+        }
+        
+        .section-header {
+            background: #7B6EF6;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 30px 0 20px 0;
+        }
+        
+        .scoring-section {
+            background: #f0f7ff;
+            border: 2px solid #0091ea;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .score-input {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+            width: 100px;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .results-box {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .recommendation {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 20px 0;
+        }
+        
+        .explanation {
+            background: #fff;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background: #f4f4f4;
+            font-weight: 600;
+        }
+        
+        .critical-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            text-align: center;
+            color: #666;
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .question-number {
+            display: inline-block;
+            background: #7B6EF6;
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>AI Agent Build vs Buy Assessment Framework</h1>
+        <div class="subtitle">Answer Questions. Get Clear Recommendations. Make Confident Decisions.</div>
+    </div>
+
+    <div class="instructions">
+        <h2>How This Assessment Works</h2>
+        <ol>
+            <li><strong>Answer all questions honestly</strong> - There are no "right" answers</li>
+            <li><strong>Count your responses</strong> - Note how many times you selected each option (A, B, or C)</li>
+            <li><strong>Get your recommendation</strong> - Based on your specific situation</li>
+            <li><strong>Understand why</strong> - See detailed explanation of the recommendation</li>
+        </ol>
+        <p><strong>Time Required:</strong> 10-15 minutes for the complete assessment</p>
+    </div>
+
+    <div class="quick-decision no-break">
+        <h2>Quick Decision Path (Optional - 2 Minutes)</h2>
+        <p><em>For executives who need a fast answer, answer these 3 questions first:</em></p>
+        
+        <div class="question-box">
+            <h4>1. Is this AI agent core to your competitive advantage?</h4>
+            <div class="radio-item">Yes - This is what makes us different from competitors</div>
+            <div class="radio-item">No - This is for operational efficiency</div>
+        </div>
+        
+        <div class="question-box">
+            <h4>2. Do you have ML engineers and DevOps teams with AI experience?</h4>
+            <div class="radio-item">Yes - We have experienced teams in both areas</div>
+            <div class="radio-item">No - We lack one or both of these capabilities</div>
+        </div>
+        
+        <div class="question-box">
+            <h4>3. Do mature solutions already exist for your use case?</h4>
+            <div class="radio-item">Yes - Multiple vendors offer what we need</div>
+            <div class="radio-item">No - Nothing really fits our requirements</div>
+        </div>
+        
+        <div class="critical-box">
+            <strong>Quick Assessment Result:</strong>
+            <ul>
+                <li>Mostly "No" answers → Strong Buy Signal (proceed to full assessment for details)</li>
+                <li>Mixed answers → Take the full assessment</li>
+                <li>Mostly "Yes" + "No" to question 3 → Possible Build candidate (complete full assessment)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h2>Complete Assessment</h2>
+
+    <div class="section-header">
+        <h3 style="margin: 0; color: white;">Section A: Use Case & Business Value</h3>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">A1</span>Process Documentation</h4>
+        <p>Can you document the exact manual process step-by-step?</p>
+        <div class="radio-item">A) Yes, we have clear, detailed documentation of every step</div>
+        <div class="radio-item">B) The process is somewhat documented but has ambiguous parts</div>
+        <div class="radio-item">C) The process is unique/complex and hard to document fully</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">A2</span>Time Investment</h4>
+        <p>How many hours per week does this process currently take across your organization?</p>
+        <div class="radio-item">A) Less than 10 hours per week</div>
+        <div class="radio-item">B) Between 10-40 hours per week</div>
+        <div class="radio-item">C) More than 40 hours per week</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">A3</span>Error Impact</h4>
+        <p>What happens when errors occur in this process?</p>
+        <div class="radio-item">A) Minor inconvenience, easily corrected</div>
+        <div class="radio-item">B) Significant impact but it's a standard process we share with others</div>
+        <div class="radio-item">C) Major impact and the process is unique to how we operate</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">A4</span>Strategic Value</h4>
+        <p>Beyond time savings, what value does automating this process provide?</p>
+        <div class="radio-item">A) Primarily operational efficiency and cost reduction</div>
+        <div class="radio-item">B) Mix of efficiency and some competitive advantage</div>
+        <div class="radio-item">C) This automation would be a key competitive differentiator</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">A5</span>Workflow Uniqueness</h4>
+        <p>How unique is your workflow compared to others in your industry?</p>
+        <div class="radio-item">A) We could name 5+ companies doing something very similar</div>
+        <div class="radio-item">B) It follows industry standards with some variations</div>
+        <div class="radio-item">C) Our workflow is genuinely unique to our organization</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">A6</span>Solution Availability</h4>
+        <p>What solutions currently exist in the market for your use case?</p>
+        <div class="radio-item">A) Many mature solutions from established vendors</div>
+        <div class="radio-item">B) A few options exist but they're limited or new</div>
+        <div class="radio-item">C) No existing solutions really address our needs</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">A7</span>Memory & Personalization Value</h4>
+        <p>How much would the agent improve if it could remember past interactions and learn patterns?</p>
+        <div class="radio-item">A) Less than 10% improvement - our process is mostly stateless</div>
+        <div class="radio-item">B) 10-25% improvement - some personalization would help</div>
+        <div class="radio-item">C) More than 25% improvement - memory/learning is critical to value</div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section-header">
+        <h3 style="margin: 0; color: white;">Section B: Technical Requirements</h3>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">B1</span>System Integrations</h4>
+        <p>How many different systems must your AI agent connect with?</p>
+        <div class="radio-item">A) 1-3 systems with standard APIs</div>
+        <div class="radio-item">B) 4-8 systems with varying API quality</div>
+        <div class="radio-item">C) More than 8 systems or many proprietary/legacy systems</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">B2</span>Integration Types</h4>
+        <p>What types of systems need integration?</p>
+        <div class="radio-item">A) All standard platforms (Salesforce, HubSpot, Slack, etc.)</div>
+        <div class="radio-item">B) Mix of standard platforms and some custom systems</div>
+        <div class="radio-item">C) Mostly custom, proprietary, or legacy systems</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">B3</span>Data Structure</h4>
+        <p>What kind of data will the agent work with?</p>
+        <div class="radio-item">A) Mostly structured data (databases, spreadsheets, forms)</div>
+        <div class="radio-item">B) Mix of structured and unstructured data</div>
+        <div class="radio-item">C) Mostly unstructured or unique data formats</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">B4</span>API Quality</h4>
+        <p>How would you rate the APIs you need to integrate with?</p>
+        <div class="radio-item">A) Excellent - well-documented, reliable, versioned</div>
+        <div class="radio-item">B) Good - some documentation issues but generally stable</div>
+        <div class="radio-item">C) Poor - limited docs, frequent changes, or unreliable</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">B5</span>Security & Compliance</h4>
+        <p>What are your security and compliance requirements?</p>
+        <div class="radio-item">A) Standard requirements (SOC2, GDPR, basic security)</div>
+        <div class="radio-item">B) Elevated requirements (HIPAA, PCI, or similar)</div>
+        <div class="radio-item">C) Extreme or unique requirements (military, proprietary, etc.)</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">B6</span>Accuracy Requirements</h4>
+        <p>What accuracy level is acceptable for your use case?</p>
+        <div class="radio-item">A) 70-80% accuracy provides good value</div>
+        <div class="radio-item">B) Need 90%+ accuracy for business value</div>
+        <div class="radio-item">C) Mission critical - need 95%+ accuracy</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">B7</span>Scale Requirements</h4>
+        <p>How many users/transactions will your agent handle?</p>
+        <div class="radio-item">A) Less than 1,000 users or low transaction volume</div>
+        <div class="radio-item">B) 1,000-100,000 users or moderate volume</div>
+        <div class="radio-item">C) More than 100,000 users or very high volume</div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section-header">
+        <h3 style="margin: 0; color: white;">Section C: Team & Resources</h3>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">C1</span>ML Engineering Expertise</h4>
+        <p>What ML/AI engineering expertise do you have in-house?</p>
+        <div class="radio-item">A) No dedicated ML engineers</div>
+        <div class="radio-item">B) 1-2 ML engineers or contractors</div>
+        <div class="radio-item">C) Strong ML team with 3+ engineers</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">C2</span>DevOps Capability</h4>
+        <p>What's your DevOps/infrastructure capability?</p>
+        <div class="radio-item">A) No dedicated DevOps team</div>
+        <div class="radio-item">B) Limited DevOps resources</div>
+        <div class="radio-item">C) Strong 24/7 DevOps team</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">C3</span>Security Expertise</h4>
+        <p>What security expertise do you have for AI systems?</p>
+        <div class="radio-item">A) No dedicated security experts for AI</div>
+        <div class="radio-item">B) Some security knowledge but not AI-specific</div>
+        <div class="radio-item">C) Dedicated security team with AI experience</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">C4</span>Maintenance Preference</h4>
+        <p>Who would ideally maintain this system long-term?</p>
+        <div class="radio-item">A) Prefer vendor to handle all maintenance</div>
+        <div class="radio-item">B) Shared responsibility between us and vendor</div>
+        <div class="radio-item">C) We want full control of maintenance</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">C5</span>Timeline Requirements</h4>
+        <p>When do you need this agent operational?</p>
+        <div class="radio-item">A) Within 3 months</div>
+        <div class="radio-item">B) 3-6 months</div>
+        <div class="radio-item">C) 6+ months is acceptable</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">C6</span>Budget Range</h4>
+        <p>What's your first-year budget for this initiative?</p>
+        <div class="radio-item">A) Less than $250,000</div>
+        <div class="radio-item">B) $250,000 - $500,000</div>
+        <div class="radio-item">C) More than $500,000</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">C7</span>Team Culture</h4>
+        <p>How does your team prefer to work with technology?</p>
+        <div class="radio-item">A) Prefer using proven tools and platforms</div>
+        <div class="radio-item">B) Open to either approach depending on the situation</div>
+        <div class="radio-item">C) Strong preference for building and controlling our stack</div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section-header">
+        <h3 style="margin: 0; color: white;">Section D: Strategic Factors</h3>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">D1</span>Strategic Importance</h4>
+        <p>How critical is this agent to your competitive strategy?</p>
+        <div class="radio-item">A) It's an operational tool, not strategic</div>
+        <div class="radio-item">B) Somewhat important to our competitive position</div>
+        <div class="radio-item">C) This is core to our competitive advantage</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">D2</span>Vendor Dependency</h4>
+        <p>How do you feel about depending on an external vendor?</p>
+        <div class="radio-item">A) Comfortable with vendor dependency for non-core functions</div>
+        <div class="radio-item">B) Some concerns but manageable with the right vendor</div>
+        <div class="radio-item">C) Must avoid vendor lock-in at all costs</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">D3</span>Change Frequency</h4>
+        <p>How often will you need to update or modify the agent's behavior?</p>
+        <div class="radio-item">A) Quarterly updates are sufficient</div>
+        <div class="radio-item">B) Monthly updates expected</div>
+        <div class="radio-item">C) Weekly or more frequent changes needed</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">D4</span>Failure Impact</h4>
+        <p>What would happen if this project failed or was delayed?</p>
+        <div class="radio-item">A) Limited impact - we'd continue with current process</div>
+        <div class="radio-item">B) Moderate impact - would affect our plans</div>
+        <div class="radio-item">C) Significant impact - would seriously harm our business</div>
+    </div>
+
+    <div class="question-box">
+        <h4><span class="question-number">D5</span>Intellectual Property</h4>
+        <p>Is there proprietary IP or "secret sauce" in this process?</p>
+        <div class="radio-item">A) No special IP - it's a standard process</div>
+        <div class="radio-item">B) Some proprietary elements but not critical</div>
+        <div class="radio-item">C) Yes, this involves critical IP or trade secrets</div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h2>Calculate Your Results</h2>
+
+    <div class="scoring-section">
+        <h3>Step 1: Count Your Responses</h3>
+        <p>Count how many times you selected each option:</p>
+        
+        <table>
+            <tr>
+                <td><strong>A responses:</strong></td>
+                <td><input type="text" class="score-input" placeholder="0"></td>
+                <td>(Typically indicates Buy signals)</td>
+            </tr>
+            <tr>
+                <td><strong>B responses:</strong></td>
+                <td><input type="text" class="score-input" placeholder="0"></td>
+                <td>(Typically indicates Evaluate/Hybrid signals)</td>
+            </tr>
+            <tr>
+                <td><strong>C responses:</strong></td>
+                <td><input type="text" class="score-input" placeholder="0"></td>
+                <td>(Typically indicates Build signals)</td>
+            </tr>
+        </table>
+        
+        <h3>Step 2: Consider Your AI Experience</h3>
+        <p>This significantly impacts your likelihood of success:</p>
+        <div class="radio-item">We have successfully deployed AI agents before</div>
+        <div class="radio-item">This is our first AI agent project</div>
+        <div class="radio-item">We've tried AI projects before but they failed</div>
+    </div>
+
+    <div class="results-box">
+        <h2>Your Recommendation</h2>
+        
+        <div class="recommendation">
+            <p>Based on your responses, the framework recommends:</p>
+            <p style="font-size: 32px; color: #1976d2;">[YOUR RECOMMENDATION APPEARS HERE]</p>
+        </div>
+        
+        <h3>Interpretation Guide:</h3>
+        
+        <div class="explanation">
+            <h4>Mostly A's (15+ out of 26) → <strong>BUY</strong></h4>
+            <ul>
+                <li>Your use case is well-suited for existing solutions</li>
+                <li>You lack the specialized expertise for building</li>
+                <li>Time-to-value is important for your organization</li>
+                <li><strong>Action:</strong> Start evaluating vendors immediately</li>
+            </ul>
+        </div>
+        
+        <div class="explanation">
+            <h4>Mixed A's and B's, Few C's → <strong>HYBRID APPROACH</strong></h4>
+            <ul>
+                <li>Buy infrastructure (databases, auth, monitoring)</li>
+                <li>Build your unique business logic and workflows</li>
+                <li>This gives you control without infrastructure burden</li>
+                <li><strong>Action:</strong> Design architecture separating commodity from unique components</li>
+            </ul>
+        </div>
+        
+        <div class="explanation">
+            <h4>Mostly C's (10+ out of 26) → <strong>BUILD</strong></h4>
+            <ul>
+                <li>Your requirements are genuinely unique</li>
+                <li>You have the expertise and resources</li>
+                <li>The agent is strategic to your business</li>
+                <li><strong>Action:</strong> Plan 6-12 month build timeline, but still buy commodity components</li>
+            </ul>
+        </div>
+        
+        <div class="critical-box">
+            <h4>⚠️ Important Adjustments:</h4>
+            <ul>
+                <li><strong>First AI project?</strong> Add 5 to your "A" count - buying reduces risk</li>
+                <li><strong>Failed AI project before?</strong> Add 8 to your "A" count - learn from vendors first</li>
+                <li><strong>Successful AI experience?</strong> Your counts stand as-is</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h2>Understanding Your Specific Situation</h2>
+
+    <div class="section-header">
+        <h3 style="margin: 0; color: white;">Key Factors Analysis</h3>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Your Answers Indicate</th>
+                <th>What This Means</th>
+                <th>Recommendation Impact</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>High time investment (40+ hrs/week)</td>
+                <td>Significant potential ROI</td>
+                <td>Could justify building IF you have expertise</td>
+            </tr>
+            <tr>
+                <td>No ML engineers</td>
+                <td>Lack critical expertise</td>
+                <td>Strong indicator to buy</td>
+            </tr>
+            <tr>
+                <td>Unique workflow</td>
+                <td>Vendors may not fit well</td>
+                <td>Points toward build or heavy customization</td>
+            </tr>
+            <tr>
+                <td>3-month timeline</td>
+                <td>Urgent need</td>
+                <td>Buy to meet deadline</td>
+            </tr>
+            <tr>
+                <td>Memory adds >25% value</td>
+                <td>Sophisticated requirements</td>
+                <td>May need custom memory architecture</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Memory Architecture Recommendations</h3>
+    
+    <p>Based on your answer to A7 (Memory Value):</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Your Response</th>
+                <th>Memory Architecture Needed</th>
+                <th>Monthly Cost</th>
+                <th>Implementation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Less than 10% value</td>
+                <td>Working Memory only</td>
+                <td>$0</td>
+                <td>Simple session storage</td>
+            </tr>
+            <tr>
+                <td>10-25% value</td>
+                <td>Working + Context Memory</td>
+                <td>$20-50</td>
+                <td>Add PostgreSQL for history</td>
+            </tr>
+            <tr>
+                <td>More than 25% value</td>
+                <td>All three memory types</td>
+                <td>$125-500</td>
+                <td>Full memory architecture</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Security Considerations</h3>
+    
+    <div class="critical-box">
+        <p>Based on your industry and requirements, consider these security factors:</p>
+        <ul>
+            <li><strong>Financial Services:</strong> HIGH risk - implement anti-fraud measures</li>
+            <li><strong>Healthcare:</strong> EXTREME risk - HIPAA compliance critical</li>
+            <li><strong>E-commerce:</strong> MEDIUM risk - protect customer data</li>
+            <li><strong>B2B SaaS:</strong> MEDIUM risk - secure client information</li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h2>Next Steps Based on Your Results</h2>
+
+    <div class="section-header">
+        <h3 style="margin: 0; color: white;">If Recommended to BUY</h3>
+    </div>
+    
+    <ol>
+        <li><strong>Create vendor evaluation criteria</strong> based on your specific needs</li>
+        <li><strong>Request demos</strong> from 3-5 vendors</li>
+        <li><strong>Run proof-of-concept</strong> with top 2 candidates</li>
+        <li><strong>Negotiate contracts</strong> with exit clauses</li>
+        <li><strong>Plan integration</strong> with your existing systems</li>
+    </ol>
+
+    <div class="section-header">
+        <h3 style="margin: 0; color: white;">If Recommended to HYBRID</h3>
+    </div>
+    
+    <ol>
+        <li><strong>Map components:</strong> What's commodity vs. unique?</li>
+        <li><strong>Buy infrastructure:</strong> PostgreSQL, Auth0, monitoring</li>
+        <li><strong>Design your unique logic:</strong> Workflows, scoring, rules</li>
+        <li><strong>Build integration layer:</strong> Connect bought and built components</li>
+        <li><strong>Maintain flexibility:</strong> Ensure you can swap components</li>
+    </ol>
+
+    <div class="section-header">
+        
