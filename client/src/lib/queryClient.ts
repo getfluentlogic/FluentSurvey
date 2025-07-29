@@ -12,6 +12,15 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
+  // For static deployment, we'll use localStorage for demo purposes
+  if (url.startsWith('/api/')) {
+    // Mock API responses for static deployment
+    return new Response(JSON.stringify({ message: 'Static deployment - API not available' }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  
   const res = await fetch(url, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
